@@ -1,14 +1,39 @@
 async function search(a) {
-  let t = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=7d77b96c972b4d119a3151101212704&q=${a}&days=3`);
+  let t = await fetch(
+    `https://api.weatherapi.com/v1/forecast.json?key=7d77b96c972b4d119a3151101212704&q=${a}&days=3`
+  );
   if (t.ok && 400 != t.status) {
     let a = await t.json();
     displayCurrent(a.location, a.current),
-    displayAnother(a.forecast.forecastday)
+      displayAnother(a.forecast.forecastday);
   }
 }
-document.getElementById("search").addEventListener("keyup", a => { search(a.target.value) });
-var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+document.getElementById("search").addEventListener("keyup", (a) => {
+  search(a.target.value);
+});
+var days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 function displayCurrent(a, t) {
   if (null != t) {
     var e = new Date(t.last_updated.replace(" ", "T"));
@@ -23,7 +48,9 @@ function displayCurrent(a, t) {
     <br><br>
     <div class="d-flex justify-content-between">
       <h1>${t.temp_c}<sup>o</sup>C</h1>
-      <h3><img src="https:${t.condition.icon}" width="90" class="mt-4" alt=""></h3>
+      <h3><img src="https:${
+        t.condition.icon
+      }" width="90" class="mt-4" alt=""></h3>
     </div>
     <br>
     <div class="content">${t.condition.text}</div>
@@ -38,13 +65,17 @@ function displayCurrent(a, t) {
     alt=""> 18km/h </span><span class=" fa-xl"><img src="icon-compass@2x.png" alt=""> East </span> -->
   </div>
   </div>`;
-    document.getElementById("ite").innerHTML = n
+    document.getElementById("ite").innerHTML = n;
   }
-} function displayAnother(a) {
-  let t = ""; for (let e = 1; e < a.length; e++)
+}
+function displayAnother(a) {
+  let t = "";
+  for (let e = 1; e < a.length; e++)
     t += `      <div class="col-4 items${e} pb-3 px-0">
     <div class="text-center cont${e} py-2 px-3">
-      <p class="mb-0">${days[new Date(a[e].date.replace(" ", "T")).getDay()]}</p>
+      <p class="mb-0">${
+        days[new Date(a[e].date.replace(" ", "T")).getDay()]
+      }</p>
     </div>
     <br>
 <div class="text-center">
@@ -58,7 +89,9 @@ function displayCurrent(a, t) {
 <br>
 </div>
 
-  </div>`
-  document.getElementById("ite").innerHTML += t
-} search("cairo");
+  </div>`;
+  document.getElementById("ite").innerHTML += t;
+}
+search("cairo");
 
+//hello
